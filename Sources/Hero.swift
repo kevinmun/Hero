@@ -381,7 +381,7 @@ extension Hero: UIViewControllerInteractiveTransitioning {
 }
 
 extension Hero: UINavigationControllerDelegate {
-  public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+  public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     self.presenting = operation == .push
     self.fromViewController = fromViewController ?? fromVC
     self.toViewController = toViewController ?? toVC
@@ -400,8 +400,8 @@ extension Hero: UITabBarControllerDelegate {
   }
 
   public func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    let fromVCIndex = tabBarController.childViewControllers.index(of: fromVC)!
-    let toVCIndex = tabBarController.childViewControllers.index(of: toVC)!
+    let fromVCIndex = tabBarController.children.index(of: fromVC)!
+    let toVCIndex = tabBarController.children.index(of: toVC)!
     self.presenting = toVCIndex > fromVCIndex
     self.fromViewController = fromViewController ?? fromVC
     self.toViewController = toViewController ?? toVC

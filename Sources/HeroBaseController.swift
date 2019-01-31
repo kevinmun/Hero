@@ -23,7 +23,7 @@
 import UIKit
 
 /// Base class for managing a Hero transition
-public class HeroBaseController: NSObject {
+@objcMembers public class HeroBaseController: NSObject {
   // MARK: Properties
   /// context object holding transition informations
   public internal(set) var context: HeroContext!
@@ -84,16 +84,16 @@ public class HeroBaseController: NSObject {
       if beginTime != nil {
         if displayLink == nil {
           displayLink = CADisplayLink(target: self, selector: #selector(displayUpdate(_:)))
-          displayLink!.add(to: RunLoop.main, forMode: RunLoopMode(rawValue: RunLoopMode.commonModes.rawValue))
+          displayLink!.add(to: RunLoop.main, forMode: RunLoop.Mode(rawValue: RunLoop.Mode.common.rawValue))
         }
       } else {
         displayLink?.isPaused = true
-        displayLink?.remove(from: RunLoop.main, forMode: RunLoopMode(rawValue: RunLoopMode.commonModes.rawValue))
+        displayLink?.remove(from: RunLoop.main, forMode: RunLoop.Mode(rawValue: RunLoop.Mode.common.rawValue))
         displayLink = nil
       }
     }
   }
-  func displayUpdate(_ link: CADisplayLink) {
+  @objc func displayUpdate(_ link: CADisplayLink) {
     if transitioning, duration > 0, let beginTime = beginTime {
       let timePassed = CACurrentMediaTime() - beginTime
 
